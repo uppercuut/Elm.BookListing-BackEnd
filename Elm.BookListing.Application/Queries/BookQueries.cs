@@ -30,6 +30,8 @@ namespace Elm.BookListing.Application.Queries
 
         public async Task<BookCoverResultDto> GetCoverByBookId(int id)
         {
+
+            ///TODO : Handel Cache deletion on the event of update and delete
             var cacheResult = await _cache.GetStringAsync("bookId#" + id);
             if (cacheResult == null)
             {

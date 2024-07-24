@@ -21,6 +21,8 @@ namespace Elm.BookListing.Infrastructure.Repositories.Books
 
         public async Task<PaginationQueryResult<Book>> GetAllWithoutCover(string term = "", PaginationQueryParameters paginationQueryParameters = null)
         {
+
+            //TODO : Wrap this with a SP on the Database and use CTE's 
             var sqlQuery = "SELECT \r\n    bookId as Id, COUNT(1) OVER () AS TotalCount, \r\n    JSON_VALUE(bookinfo, '$.\"BookTitle\"') AS Title, \r\n    JSON_VALUE(bookinfo, '$.\"BookDescription\"') AS [Description], \r\n    JSON_VALUE(bookinfo, '$.\"Author\"') AS Author, \r\n    JSON_VALUE(bookinfo, '$.\"PublishDate\"') AS PublishDate\r\nFROM \r\n    [Book]\r\nWHERE \r\n(@term IS NULL OR @term ='' )OR \r\n (JSON_VALUE(bookinfo, '$.\"BookTitle\"') like '%'+@term+'%' OR\r\n JSON_VALUE(bookinfo, '$.\"BookDescription\"') like '%'+@term+'%' OR\r\n JSON_VALUE(bookinfo, '$.\"Author\"') like '%'+@term+'%' OR\r\n JSON_VALUE(bookinfo, '$.\"PublishDate\"') like '%'+@term+'%') ORDER BY bookId\r\n OFFSET (@PageNumber - 1) * @PageSize ROWS  \r\n FETCH NEXT @PageSize ROWS ONLY;";
 
             var dbResult = (await _queryExecuter.QueryAsync<BookResultWithCount>(sqlQuery,

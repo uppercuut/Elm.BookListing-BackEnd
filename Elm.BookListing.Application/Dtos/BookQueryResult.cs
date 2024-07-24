@@ -14,5 +14,10 @@ namespace Elm.BookListing.Application.Dtos
         public string? Author { get; set; }
         public string? PublishDate { get; set; }
         public string? Cover { get; set; }
+        public string? PublishDateOnly
+        {
+            get => PublishDate?.Split('T')[0];
+            set => PublishDate = value;
+        }
     }
 }

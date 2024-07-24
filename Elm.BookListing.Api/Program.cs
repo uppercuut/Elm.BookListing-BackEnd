@@ -5,6 +5,7 @@ using Elm.BookListing.Domain.Repositories;
 using Elm.BookListing.Infrastructure.Repositories.Books;
 using Elm.BookListing.Application.Queries;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +40,27 @@ builder.Services.AddInMemoryRateLimiting();
 builder.Services.AddSingleton<IClientPolicyStore, DistributedCacheClientPolicyStore>();
 builder.Services.AddSingleton<IRateLimitCounterStore, DistributedCacheRateLimitCounterStore>();
 
+
+Action<CorsOptions> corsOptions = null;
+CorsPolicyBuilder corsPolicyBuilder = new CorsPolicyBuilder()
+                        .AllowAnyHeader()
+                        .SetIsOriginAllowed((host) => true)
+                        .AllowAnyMethod();
+if (builder.Environment.IsDevelopment())
+{
+    corsPolicyBuilder.AllowAnyOrigin();
+    corsOptions = options => options.AddDefaultPolicy(corsPolicyBuilder.Build());
+}
+else
+{
+    var origins = builder.Configuration.GetSection("AllowedOrigins").Value.Split(',');
+    corsPolicyBuilder.WithOrigins(origins).AllowCredentials();
+    corsOptions = options => options.AddPolicy("AllowCors", corsPolicyBuilder.Build());
+}
+builder.Services.AddCors(corsOptions);
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -46,6 +68,11 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseCors();
+}
+else
+{
+    app.UseCors("AllowCors");
 }
 
 app.UseHttpsRedirection();
@@ -55,3 +82,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+
+

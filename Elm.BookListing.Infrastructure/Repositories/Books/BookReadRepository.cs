@@ -1,7 +1,7 @@
 ﻿using Elm.BookListing.Domain.Abstractions;
 using Elm.BookListing.Domain.Entites;
 using Elm.BookListing.Domain.Repositories;
-using MApp.Framework.Application.Queries;
+using Elm.BookListing.Application.Queries;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;

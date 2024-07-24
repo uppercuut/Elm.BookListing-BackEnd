@@ -3,7 +3,7 @@ using Elm.BookListing.Application.Queries;
 using Elm.BookListing.Domain.Abstractions;
 using Elm.BookListing.Domain.Repositories;
 using Elm.BookListing.Infrastructure.Repositories.Books;
-using MApp.Framework.Application.Queries;
+using Elm.BookListing.Application.Queries;
 using Microsoft.Extensions.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);

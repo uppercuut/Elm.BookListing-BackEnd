@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-namespace MApp.Framework.Application.Queries
+namespace Elm.BookListing.Application.Queries
 {
     public class PaginationQueryResult<T>
     {

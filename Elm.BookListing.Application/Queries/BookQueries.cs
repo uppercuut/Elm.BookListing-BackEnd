@@ -1,7 +1,7 @@
 ﻿using Elm.BookListing.Application.Dtos;
 using Elm.BookListing.Domain.Entites;
 using Elm.BookListing.Domain.Repositories;
-using MApp.Framework.Application.Queries;
+using Elm.BookListing.Application.Queries;
 using Mapster;
 using Microsoft.Extensions.Caching.Distributed;
 using System;

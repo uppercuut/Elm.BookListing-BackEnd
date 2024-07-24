@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-namespace MApp.Framework.Application.Queries
+namespace Elm.BookListing.Application.Queries
 {
     public class QueryExecuter : IQueryExecuter
     {

@@ -1,5 +1,5 @@
 ﻿using Elm.BookListing.Application.Dtos;
-using MApp.Framework.Application.Queries;
+using Elm.BookListing.Application.Queries;
 using System;
 using System.Collections.Generic;
 using System.Linq;

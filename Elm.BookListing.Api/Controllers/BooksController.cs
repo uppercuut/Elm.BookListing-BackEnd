@@ -1,5 +1,5 @@
 ﻿using Elm.BookListing.Application.Queries;
-using MApp.Framework.Application.Queries;
+using Elm.BookListing.Application.Queries;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
